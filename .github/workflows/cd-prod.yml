@@ -1,0 +1,21 @@
+name: CD - Production
+
+on:
+  push:
+    branches: [ main ] # Triggered on a merge/push to main (production)
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    environment: production # Injects production environment secrets
+    steps:
+      - name: Step 1 - Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Step 3 - Trigger Render Deployment Hook
+        run: |
+          curl -X POST ${{ secrets.RENDER_DEPLOY_HOOK_PROD_URL }}
+
+      - name: Step 4 - Confirm Deployment
+        run: |
+          echo "Deployment to production triggered at $(date)"
