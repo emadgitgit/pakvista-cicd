@@ -2,7 +2,7 @@ name: CI - Production
 
 on:
   pull_request:
-    branches: [ main ] # Triggered on a Pull Request targeting main
+    branches: [ main ]
 
 jobs:
   build-and-push:
